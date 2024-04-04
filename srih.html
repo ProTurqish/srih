@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SriH</title>
+    <link rel="icon" type="image/x-icon" href="https://github.com/ProTurqish/files/srih.svg">
+    <style>
+        #code {
+            width: 400px;
+            height: 500px;
+            resize: none;
+            float: left;
+            margin-right: 20px;
+        }
+
+        #terminal {
+            background-color: black;
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            width: 400px;
+            height: 200px;
+            overflow-y: auto;
+            float: right;
+        }
+
+        #srih {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: #00ffb3;
+            padding: 10px;
+            color: black;
+            font-weight: bold;
+        }
+
+        #runButton {
+            clear: both; /* Bu öğenin önceki öğelerin altında olmasını sağlar */
+            margin-top: 10px; /* Terminalden biraz boşluk bırakır */
+            display: block; /* Butonun blok olarak görünmesini sağlar */
+        }
+    </style>
+</head>
+<body>
+    <div id="srih">Script running in HTML</div>
+
+    <label for="code">Kod Alanı:</label><br>
+    <textarea id="code" rows="4" cols="50"></textarea><br>
+    
+    <div id="terminal"></div>
+
+    <button id="runButton" onclick="checkCode()">Çalıştır</button>
+
+    <script>
+        function checkCode() {
+            var code = document.getElementById('code').value;
+            var terminal = document.getElementById('terminal');
+
+            var regex = /"([^"]+)"/g;
+            var matches = code.match(regex);
+
+            if (matches && matches.length > 0) {
+                terminal.innerHTML = "\n";
+                matches.forEach(function(match) {
+                    terminal.innerHTML += match.slice(1, -1) + "\n";
+                });
+            } else {
+                terminal.innerHTML = "\n";
+            }
+        }
+    </script>
+</body>
+</html>

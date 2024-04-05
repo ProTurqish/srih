@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="icon" type="https://proturqish.github.io/srih/srih.svg">
+    <link rel="icon" type="image/svg+xml" href="https://proturqish.github.io/srih/srih.svg">
     <title>SriH</title>
     <style>
         #code {
@@ -37,10 +37,10 @@
             font-weight: bold;
         }
 
-        #runButton {
-            clear: both; /* Bu öğenin önceki öğelerin altında olmasını sağlar */
-            margin-top: 10px; /* Terminalden biraz boşluk bırakır */
-            display: block; /* Butonun blok olarak görünmesini sağlar */
+        .runButton {
+            clear: both; 
+            margin-top: 10px; 
+            display: block; 
         }
     </style>
 </head>
@@ -52,10 +52,29 @@
     
     <div id="terminal"></div>
 
-    <button id="runButton" onclick="checkCode()">Çalıştır</button>
+    <button class="runButton" onclick="checkCode()">Çalıştır</button>
 
     <script>
         function checkCode() {
+            var code = document.getElementById('code').value;
+            var terminal = document.getElementById('terminal');
+
+            var regex = /"([^"]+)"/g;
+            var matches = code.match(regex);
+
+            if (matches && matches.length > 0) {
+                terminal.innerHTML = "Terminal Çıktısı:\n";
+                matches.forEach(function(match) {
+                    terminal.innerHTML += match.slice(1, -1) + "\n";
+                });
+            } else {
+                terminal.innerHTML = "Terminal Çıktısı:\n";
+            }
+        }
+
+    </script>
+    <script>
+         function checkCode() {
             var code = document.getElementById('code').value;
             var terminal = document.getElementById('terminal');
 
@@ -70,7 +89,28 @@
             } else {
                 terminal.innerHTML = "\n";
             }
+        
+            var code = document.getElementById('code').value;
+            var terminal = document.getElementById('terminal');
+    
+            // Toplama işlemi için regular expression tanımlıyoruz
+            var regex = /(\d+)\s*\+\s*(\d+)/g;
+            var matches = code.matchAll(regex);
+            var sum = 0;
+    
+            // Her eşleşmeyi al ve topla
+            for (const match of matches) {
+                var num1 = parseInt(match[1]);
+                var num2 = parseInt(match[2]);
+                var result = num1 + num2;
+                sum += result;
+                terminal.innerHTML += + result + "\n";
+            }
+    
+            // Sonucu terminal bölgesine yazdır
+            terminal.innerHTML + result ;
         }
     </script>
+
 </body>
 </html>
